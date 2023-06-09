@@ -13,25 +13,7 @@ public class Example
 
         while (true)
         {
-            try
-            {
-                HttpListenerContext context = listener.GetContext();
-                HttpListenerRequest request = context.Request;
 
-                string postData = "";
-                using (StreamReader reader = new StreamReader(request.InputStream))
-                {
-                    postData = reader.ReadToEnd();
-                }
-                Console.WriteLine(postData);
-                string responseString = 服务器.Analysis.GetReturnMessage(postData);
-
-                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
-                context.Response.ContentLength64 = buffer.Length;
-                context.Response.OutputStream.Write(buffer, 0, buffer.Length);
-                context.Response.OutputStream.Close();
-            }
-            catch (Exception ex) { API.Print(ex.Message); }
         }
     }
 }
