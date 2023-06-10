@@ -14,24 +14,23 @@ namespace 服务器.GameSDKS
         /// </summary>
         /// <param name="emailAddress">用户的邮箱地址。</param>
         /// <param name="password">用户密码。</param>
-        /// <param name="name">用户名。</param>
         /// <returns>返回注册用户的实际 ID 值，如果注册失败则返回 -1。</returns>
-        public int SignUpNewUser (string emailAddress, string password, string name)
+        public int SignUpNewUser (string emailAddress, string password)
         {
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var checkCommand = new SqlCommand($"SELECT COUNT(*) FROM db_Users WHERE EmailAddress='{emailAddress}'", connection);
+                var checkCommand = new SqlCommand($"SELECT COUNT(*) FROM db_Users WHERE EmailAddress = '{emailAddress}'", connection);
                 int count = (int)checkCommand.ExecuteScalar();
                 if (count > 0)
                 {
-                    API.Print("Email address already registered.");
+
                     //邮箱是否已经注册过了
                     return -1;
                 }
 
-
-                var insertCommand = new SqlCommand($"INSERT INTO db_Users (EmailAddress, PassWord, UserName) VALUES ('{emailAddress}', '{password}', '{name}'); SELECT SCOPE_IDENTITY();", connection);
+                //name
+                var insertCommand = new SqlCommand($"INSERT INTO db_Users (EmailAddress, PassWord) VALUES ('{emailAddress}', '{password}'); SELECT SCOPE_IDENTITY();", connection);
                 int newID = Convert.ToInt32(insertCommand.ExecuteScalar());
                 if (newID == 0)
                 {

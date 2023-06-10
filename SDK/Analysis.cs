@@ -90,7 +90,7 @@ namespace 服务器
             return "胡桃日记(Menherachan)最新版本来啦" + endl + "1.账号的加入。";
         }
         /// <summary>
-        /// SignUp&email&password&name
+        /// SignUp&email&password
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
@@ -99,7 +99,7 @@ namespace 服务器
             try
             {
                 string[] analysis = message.Split('&'); var us = new Users("Users");
-                return us.SignUpNewUser(analysis[1], analysis[2], analysis[3]).ToString();
+                return us.SignUpNewUser(analysis[1], analysis[2]).ToString();
             }
             catch (Exception ex)
             {
