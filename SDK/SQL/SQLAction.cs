@@ -79,10 +79,6 @@ namespace 服务器.SQL
                     int rowsAffected = updateCommand.ExecuteNonQuery();
                     // API.Print($"{rowsAffected} row(s) updated.");
                 }
-
-
-
-
             }
 
         }

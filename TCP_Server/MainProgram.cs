@@ -13,7 +13,7 @@ namespace ServerProgram
 
         public static void Main (string[] args)
         {
-            string[] t = new string[] { "UserName" };
+            string[] t = new string[] { "PassWord" };
             string[] t1 = new string[] { "一水" };
             var sQLAction = new SQLAction("Users");
             var us = new Users("Users");
@@ -24,7 +24,7 @@ namespace ServerProgram
 
             //sQLAction.InsertData("db_Users", t, t1);
             // sQLAction.UpdateOrCreateData("db_Users", t, t1, "UID = 10001");
-            // API.Print(SQLT_Operate.TSQL_Read<string>("Zhangzijian\\SQLEXPRESS", "Users", "UID = 10001", t));
+            API.Print(SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", t)[0]);
 
 
 
