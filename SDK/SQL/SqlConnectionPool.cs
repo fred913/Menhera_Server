@@ -11,6 +11,7 @@ namespace SDK.SQL
         {
             if (_connectionPool.TryDequeue(out var connection))
             {
+                connection.ConnectionString = _connectionString;
                 return connection;
             }
 
