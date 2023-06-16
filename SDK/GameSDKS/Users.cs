@@ -1,4 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿
+using SDK.SQL;
+using System.Data.SqlClient;
 
 namespace 服务器.GameSDKS
 {
@@ -17,7 +19,7 @@ namespace 服务器.GameSDKS
         /// <returns>返回注册用户的实际 ID 值，如果注册失败则返回 -1。</returns>
         public int SignUpNewUser (string emailAddress, string password)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = SqlConnectionPool.GetConnection())
             {
                 connection.Open();
                 var checkCommand = new SqlCommand($"SELECT COUNT(*) FROM db_Users WHERE EmailAddress = '{emailAddress}'", connection);
@@ -26,6 +28,7 @@ namespace 服务器.GameSDKS
                 {
 
                     //邮箱是否已经注册过了
+                    SqlConnectionPool.ReturnConnection(connection);
                     return -1;
                 }
 
@@ -35,11 +38,13 @@ namespace 服务器.GameSDKS
                 if (newID == 0)
                 {
                     //插入失败
+                    SqlConnectionPool.ReturnConnection(connection);
                     return -2;
                 }
                 else
                 {
                     //返回新创建的用户ID
+                    SqlConnectionPool.ReturnConnection(connection);
                     return newID;
                 }
             }
@@ -53,7 +58,7 @@ namespace 服务器.GameSDKS
         /// <returns>返回一个标志值，表示更新操作是否成功。</returns>
         public bool UpdateUserInfo (string tablename, string id, string columnName, string columnValue)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = SqlConnectionPool.GetConnection())
             {
                 connection.Open();
 
@@ -62,7 +67,8 @@ namespace 服务器.GameSDKS
                 int count = (int)checkCommand.ExecuteScalar();
                 if (count == 0)
                 {
-                    API.Print("User does not exist.");
+                    //API.Print("User does not exist.");
+                    SqlConnectionPool.ReturnConnection(connection);
                     return false;
                 }
 
@@ -72,12 +78,14 @@ namespace 服务器.GameSDKS
                 int rowsAffected = updateCommand.ExecuteNonQuery();
                 if (rowsAffected == 0)
                 {
-                    API.Print("Failed to update user information.");
+                    //API.Print("Failed to update user information.");
+                    SqlConnectionPool.ReturnConnection(connection);
                     return false;
                 }
                 else
                 {
-                    API.Print("User information updated successfully.");
+                    //API.Print("User information updated successfully.");
+                    SqlConnectionPool.ReturnConnection(connection);
                     return true;
                 }
             }
@@ -91,7 +99,7 @@ namespace 服务器.GameSDKS
         /// <returns></returns>
         public bool IsPassword (string condition, string password)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = SqlConnectionPool.GetConnection())
             {
                 connection.Open();
 
@@ -100,6 +108,7 @@ namespace 服务器.GameSDKS
                 int count = (int)checkCommand.ExecuteScalar();
                 if (count == 0)
                 {
+                    SqlConnectionPool.ReturnConnection(connection);
                     return false;
                 }
 
@@ -108,10 +117,12 @@ namespace 服务器.GameSDKS
                 string dbPassword = (string)checkPasswordCommand.ExecuteScalar();
                 if (dbPassword != password)
                 {
+                    SqlConnectionPool.ReturnConnection(connection);
                     return false;
                 }
 
                 // 密码正确
+                SqlConnectionPool.ReturnConnection(connection);
                 return true;
             }
         }

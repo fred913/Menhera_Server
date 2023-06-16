@@ -4,16 +4,10 @@ namespace SDK.SQL
 {
     public class SqlConnectionPool
     {
-        private readonly string _connectionString;
-        private readonly Queue<SqlConnection> _connectionPool;
+        private static string _connectionString = ConnectionString.GetconnectionString("Users");
+        private static Queue<SqlConnection> _connectionPool = new Queue<SqlConnection>();
 
-        public SqlConnectionPool (string connectionString)
-        {
-            _connectionString = connectionString;
-            _connectionPool = new Queue<SqlConnection>();
-        }
-
-        public SqlConnection GetConnection ()
+        public static SqlConnection GetConnection ()
         {
             if (_connectionPool.TryDequeue(out var connection))
             {
@@ -23,7 +17,7 @@ namespace SDK.SQL
             return new SqlConnection(_connectionString);
         }
 
-        public void ReturnConnection (SqlConnection connection)
+        public static void ReturnConnection (SqlConnection connection)
         {
             connection.Close();
             _connectionPool.Enqueue(connection);

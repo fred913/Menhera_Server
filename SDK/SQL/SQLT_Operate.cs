@@ -6,12 +6,10 @@ public static class SQLT_Operate
     private static readonly string connectionString = ConnectionString.GetconnectionString("Users");
 
 
-    private static readonly SqlConnectionPool pool = new SqlConnectionPool(connectionString);
-
     //增
     public static bool TSQL_ADD (string _Table_Name, string[] _List_Name, string[] _List_Value)
     {
-        using (SqlConnection conn = pool.GetConnection())
+        using (SqlConnection conn = SqlConnectionPool.GetConnection())
         {
             //构造 insert 语句
             conn.Open();
@@ -20,7 +18,7 @@ public static class SQLT_Operate
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
                 int result = cmd.ExecuteNonQuery();
-                pool.ReturnConnection(conn);
+                SqlConnectionPool.ReturnConnection(conn);
                 return result > 0;
             }
         }
@@ -29,7 +27,7 @@ public static class SQLT_Operate
     //删
     public static bool TSQL_Delete (string _Table_Name, string[] _List_Name, string[] _List_Value)
     {
-        using (SqlConnection conn = pool.GetConnection())
+        using (SqlConnection conn = SqlConnectionPool.GetConnection())
         {
             conn.Open();
             //构造 delete 语句
@@ -44,7 +42,7 @@ public static class SQLT_Operate
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
                 int result = cmd.ExecuteNonQuery();
-                pool.ReturnConnection(conn);
+                SqlConnectionPool.ReturnConnection(conn);
                 return result > 0;
             }
         }
@@ -53,7 +51,7 @@ public static class SQLT_Operate
     //改
     public static bool TSQL_Update (string _Table_Name, string _Condition, string[] _List_Name, string[] _List_Value)
     {
-        using (SqlConnection conn = pool.GetConnection())
+        using (SqlConnection conn = SqlConnectionPool.GetConnection())
         {
             conn.Open();
             //构造 update 语句
@@ -68,7 +66,7 @@ public static class SQLT_Operate
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
                 int result = cmd.ExecuteNonQuery();
-                pool.ReturnConnection(conn);
+                SqlConnectionPool.ReturnConnection(conn);
                 return result > 0;
             }
         }
@@ -77,7 +75,7 @@ public static class SQLT_Operate
     //查
     public static List<T> TSQL_Read<T> (string _Table_Name, string _Condition, string[] _List_Name)
     {
-        using (SqlConnection conn = pool.GetConnection())
+        using (SqlConnection conn = SqlConnectionPool.GetConnection())
         {
             conn.Open();
             //构造 select 语句
@@ -95,8 +93,7 @@ public static class SQLT_Operate
                         results.Add(result);
                     }
                 }
-
-                pool.ReturnConnection(conn);
+                SqlConnectionPool.ReturnConnection(conn);
                 return results;
             }
         }

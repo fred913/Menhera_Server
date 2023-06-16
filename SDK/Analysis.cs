@@ -5,7 +5,7 @@ namespace 服务器
 {
     public static class Analysis
     {
-        const char endl = '\n';
+        public const char endl = '\n';
 
         /*
         public static string GetReturnMessage (string message)
@@ -65,6 +65,7 @@ namespace 服务器
                 { "SignUp", SignUp },
                 { "Login", Login },
                 {"GetInfo", Getinfo},
+                {"UpdateInfo",UpdateInfo},
         };
             var parts = message.Split('&');
             var actionName = parts[0];
@@ -150,5 +151,33 @@ namespace 服务器
                 return sQLAction.SelectData(analysis[3], t, analysis[1]);
             }
         }
+
+        /// <summary>
+        ///  UpdateInfo & condition(UID) & password & tablename & value
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private static string UpdateInfo (string message)
+        {
+            string[] analysis = message.Split('&'); var user = new Users("Users");
+            if (!user.IsPassword(analysis[1], analysis[2]))
+            {
+                return "账号或密码错误";
+
+            }
+            else
+            {
+                try
+                {
+                    return user.UpdateUserInfo("db_Menherachan", analysis[1], analysis[3], analysis[4]).ToString();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+
+            }
+        }
+
     }
 }

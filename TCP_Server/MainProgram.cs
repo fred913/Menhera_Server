@@ -24,7 +24,7 @@ namespace ServerProgram
 
             //sQLAction.InsertData("db_Users", t, t1);
             // sQLAction.UpdateOrCreateData("db_Users", t, t1, "UID = 10001");
-            API.Print(SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", t)[0]);
+            //API.Print(SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", t)[0]);
 
 
 
