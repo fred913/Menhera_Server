@@ -34,15 +34,15 @@ namespace ServerProgram
         static void StartServer ()
         {
 
-            //TcpListener listener = new TcpListener(IPAddress.Any, 800);
-            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 822);
+            TcpListener listener = new TcpListener(IPAddress.Any, 822);
+            //TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 822);
             listener.Start();
             API.Print("Server started.");
             while (true)
             {
                 TcpClient client = listener.AcceptTcpClient();
                 ClientInfo newClient = new ClientInfo(client);
-                API.Print("GetClient: " + newClient.IpAddress);
+
                 clients.Add(newClient);
 
                 Thread clientThread = new Thread(() => HandleClient(newClient));
@@ -84,7 +84,9 @@ namespace ServerProgram
                 }
                 catch
                 {
+                    API.Print("GetClient: " + client.IpAddress);
                     break;
+
                 }
             }
 
