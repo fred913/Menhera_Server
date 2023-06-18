@@ -20,8 +20,16 @@ namespace SDK.SQL
 
         public static void ReturnConnection (SqlConnection connection)
         {
-            connection.Close();
-            _connectionPool.Enqueue(connection);
+            try
+            {
+                connection.Close();
+                _connectionPool.Enqueue(connection);
+            }
+            catch (Exception ex)
+            {
+                API.Print(ex.Message);
+            }
+
         }
     }
 }

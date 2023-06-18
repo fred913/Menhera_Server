@@ -3,9 +3,6 @@ using System.Data.SqlClient;
 
 public static class SQLT_Operate
 {
-    private static readonly string connectionString = ConnectionString.GetconnectionString("Users");
-
-
     //增
     public static bool TSQL_ADD (string _Table_Name, string[] _List_Name, string[] _List_Value)
     {
