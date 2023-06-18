@@ -66,6 +66,7 @@ namespace 服务器
                 { "Login", Login },
                 {"GetInfo", Getinfo},
                 {"UpdateInfo",UpdateInfo},
+                { "SendMail",SendMail}
         };
             var parts = message.Split('&');
             var actionName = parts[0];
@@ -79,6 +80,24 @@ namespace 服务器
             {
                 return "Error";
             }
+        }
+
+        /// <summary>
+        /// SendMail & Email
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private static string SendMail (string message)
+        {
+            string[] analysis = message.Split('&');
+            if (message != "")
+            {
+                return API.SendMail("zhangzijian@menherachan.cn", "Menherachan0822", analysis[1], "您正在参与验证码服务", "您的验证码为:" + API.GetRandomInAB(100000, 999999)).ToString();
+
+
+            }
+            return "False";
+            // throw new NotImplementedException();
         }
 
         private static string GetVersion (string message)

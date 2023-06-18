@@ -73,6 +73,7 @@ namespace 服务器.GameSDKS
                 }
 
                 // 更新用户信息
+
                 var updateCommand = new SqlCommand($"UPDATE {tablename} SET {columnName}=@value WHERE ID={id}", connection);
                 updateCommand.Parameters.AddWithValue("@value", columnValue);
                 int rowsAffected = updateCommand.ExecuteNonQuery();

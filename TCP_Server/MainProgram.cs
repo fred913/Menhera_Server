@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using TCP_Server.TCPClient;
 using 服务器;
 using 服务器.GameSDKS;
 using 服务器.SQL;
@@ -55,12 +56,9 @@ namespace ServerProgram
             NetworkStream stream = client.TcpClient.GetStream();
 
             byte[] buffer = new byte[1024];
-            int bytesRead = 0;
-
             while (true)
             {
-                bytesRead = 0;
-
+                int bytesRead;
                 try
                 {
                     bytesRead = stream.Read(buffer, 0, buffer.Length);
@@ -101,17 +99,5 @@ namespace ServerProgram
         }
     }
 
-    class ClientInfo
-    {
-        public TcpClient TcpClient { get; set; }
-        public string ClientId { get; set; }
-        public string IpAddress { get; set; }
 
-        public ClientInfo (TcpClient tcpClient)
-        {
-            TcpClient = tcpClient;
-            ClientId = Guid.NewGuid().ToString();
-            IpAddress = ((IPEndPoint)tcpClient.Client.RemoteEndPoint).Address.ToString();
-        }
-    }
 }
