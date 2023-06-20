@@ -50,12 +50,13 @@ namespace ServerProgram
             StartServer();
         }
 
-        static void StartServer ()
+        public static void StartServer ()
         {
 
             TcpListener listener = new TcpListener(IPAddress.Any, 822);
             //TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 822);
             listener.Start();
+
             API.Print("Server started.");
             while (true)
             {
@@ -69,7 +70,7 @@ namespace ServerProgram
             }
         }
 
-        static void HandleClient (ClientInfo client)
+        public static void HandleClient (ClientInfo client)
         {
             NetworkStream stream = client.TcpClient.GetStream();
 
@@ -90,7 +91,6 @@ namespace ServerProgram
                 {
                     break;
                 }
-
                 string request = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                 string response = ProcessRequest(request);
                 byte[] data = Encoding.UTF8.GetBytes(response);
@@ -105,7 +105,6 @@ namespace ServerProgram
 
                 }
             }
-
             clients.Remove(client);
             client.TcpClient.Close();
         }
@@ -117,4 +116,18 @@ namespace ServerProgram
         }
     }
 }
-#pragma warning restore CS0164
+/*
+       　  　▃▆█▇▄▖
+　 　 　 ▟◤▖　　　◥█▎
+   　 ◢◤　 ▐　　　 　▐▉
+　 ▗◤　　　▂　▗▖　　▕█▎
+　◤　▗▅▖◥▄　▀◣　　█▊
+▐　▕▎◥▖◣◤　　　　◢██
+█◣　◥▅█▀　　　　▐██◤
+▐█▙▂　　     　◢██◤
+◥██◣　　　　◢▄◤
+ 　　▀██▅▇▀
+*/
+
+
+
