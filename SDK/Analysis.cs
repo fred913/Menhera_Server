@@ -172,7 +172,7 @@ namespace 服务器
         }
 
         /// <summary>
-        ///  UpdateInfo & condition(UID) & password & tablename & value
+        ///  UpdateInfo & condition(UID) & password & Listname & value & tablename
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
@@ -188,7 +188,9 @@ namespace 服务器
             {
                 try
                 {
-                    return user.UpdateUserInfo("db_Menherachan", analysis[1], analysis[3], analysis[4]).ToString();
+
+                    return SQLT_Operate.TSQL_Update(analysis[5], analysis[1], API.GetArray(analysis[3]), API.GetArray(analysis[4])).ToString();
+                    //return user.UpdateUserInfo("db_Menherachan", analysis[1], analysis[3], analysis[4]).ToString();
                 }
                 catch (Exception ex)
                 {

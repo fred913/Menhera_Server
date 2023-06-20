@@ -63,7 +63,7 @@ namespace 服务器.GameSDKS
                 connection.Open();
 
                 // 检查该 ID 是否存在
-                var checkCommand = new SqlCommand($"SELECT COUNT(*) FROM {tablename} WHERE ID={id}", connection);
+                var checkCommand = new SqlCommand($"SELECT COUNT(*) FROM {tablename} WHERE UID={id}", connection);
                 int count = (int)checkCommand.ExecuteScalar();
                 if (count == 0)
                 {
@@ -74,7 +74,7 @@ namespace 服务器.GameSDKS
 
                 // 更新用户信息
 
-                var updateCommand = new SqlCommand($"UPDATE {tablename} SET {columnName}=@value WHERE ID={id}", connection);
+                var updateCommand = new SqlCommand($"UPDATE {tablename} SET {columnName}=@value WHERE UID={id}", connection);
                 updateCommand.Parameters.AddWithValue("@value", columnValue);
                 int rowsAffected = updateCommand.ExecuteNonQuery();
                 if (rowsAffected == 0)

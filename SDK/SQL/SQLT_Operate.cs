@@ -50,7 +50,7 @@ public static class SQLT_Operate
     {
         using (SqlConnection conn = SqlConnectionPool.GetConnection())
         {
-            conn.Open(); 0
+            conn.Open();
             //构造 update 语句
             List<string> assignments = new List<string>();
             for (int i = 0; i < _List_Name.Length; i++)
