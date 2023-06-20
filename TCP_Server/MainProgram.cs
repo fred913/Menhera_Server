@@ -1,4 +1,5 @@
 ﻿#pragma warning disable CS0164
+using SDK;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -37,13 +38,14 @@ namespace ServerProgram
             /*测试通过
         API.Print(Analysis.GetReturnMessage($"UpdateInfo&UID = 10001&f36bb8bcda27e0e0ceb6e4bc3a64a506&UserName&一水久"));
         API.Print(Analysis.GetReturnMessage($"GetInfo&UID = 10001&f36bb8bcda27e0e0ceb6e4bc3a64a506&db_Users&UserName"));
+            
             */
 
             //sQLAction.InsertData("db_Users", t, t1);
             // sQLAction.UpdateOrCreateData("db_Users", t, t1, "UID = 10001");
             //API.Print(SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", t)[0]);
 
-
+            // API.Print(Analysis.GetReturnMessage($"Ver"));
 
             StartServer();
         }

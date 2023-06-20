@@ -1,4 +1,5 @@
-﻿using 服务器.GameSDKS;
+﻿using SDK;
+using 服务器.GameSDKS;
 using 服务器.SQL;
 
 namespace 服务器
@@ -102,7 +103,8 @@ namespace 服务器
 
         private static string GetVersion (string message)
         {
-            return "0.1.0";
+            var ini = new SDK.INIFile("config.ini");
+            return ini.Read("GameInfo", "Ver", "0.1.1");
         }
 
         private static string GetNews (string message)
