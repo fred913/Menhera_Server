@@ -13,7 +13,7 @@ namespace SDK
 
         public INIFile (string path)
         {
-            this.Path = path;
+            this.Path = System.IO.Directory.GetCurrentDirectory() + "/" + path;
         }
 
         public void Write (string section, string key, string value)

@@ -40,14 +40,18 @@ namespace ServerProgram
         API.Print(Analysis.GetReturnMessage($"GetInfo&UID = 10001&f36bb8bcda27e0e0ceb6e4bc3a64a506&db_Users&UserName"));
             
             */
-
+            //API.Getverification("zhangzijian_itmail@yeah.net");
             //sQLAction.InsertData("db_Users", t, t1);
             // sQLAction.UpdateOrCreateData("db_Users", t, t1, "UID = 10001");
             //API.Print(SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", t)[0]);
-
+            //API.SendMail("mail@menherachan");
             // API.Print(Analysis.GetReturnMessage($"Ver"));
 
+
+
+
             StartServer();
+
         }
 
         public static void StartServer ()

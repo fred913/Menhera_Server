@@ -104,7 +104,7 @@ namespace 服务器
         private static string GetVersion (string message)
         {
             var ini = new SDK.INIFile("config.ini");
-            return ini.Read("GameInfo", "Ver", "0.1.1");
+            return ini.Read("GameInfo", "Ver");
         }
 
         private static string GetNews (string message)
