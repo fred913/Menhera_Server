@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using SDK.SQL;
+using System.Data.SqlClient;
 
 namespace 服务器.SQL
 {
@@ -53,7 +54,7 @@ namespace 服务器.SQL
         /// <param name="condition"></param>
         public void UpdateOrCreateData (string tableName, string[] columns, object[] values, string condition)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = SqlConnectionPool.GetConnection())
             {
                 connection.Open();
 
@@ -79,12 +80,8 @@ namespace 服务器.SQL
                     int rowsAffected = updateCommand.ExecuteNonQuery();
                     // API.Print($"{rowsAffected} row(s) updated.");
                 }
-
-
-
-
+                SqlConnectionPool.ReturnConnection(connection);
             }
-
         }
         /// <summary>
         /// 使用范例：
@@ -114,7 +111,7 @@ namespace 服务器.SQL
         /// <param name="condition"></param>
         public string SelectData (string tableName, string[] columns, string condition = "")//zhangzijian @itmail@yeah.net
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = SqlConnectionPool.GetConnection())
             {
                 connection.Open();
 
@@ -131,11 +128,14 @@ namespace 服务器.SQL
                             {
                                 values.Add($"{reader.GetValue(i)}");
                             }
+                            SqlConnectionPool.ReturnConnection(connection);
                             return string.Join("&", values);
                         }
                     }
                 }
+                SqlConnectionPool.ReturnConnection(connection);
             }
+
             return "None";
         }
         //By 一水久钟
