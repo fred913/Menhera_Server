@@ -22,10 +22,10 @@ namespace Http_Server.Controllers
         }
 
         [HttpGet]
-        public  IEnumerable<string> UserRegister(string username, string password, string name)
+        public  IEnumerable<string> UserRegister(string username, string password)
         {
             Users user = new Users("Users");
-            int num = user.SignUpNewUser(username, password, name);
+            int num = user.SignUpNewUser(username, password);
             switch (num)
             {
                 case -1:
