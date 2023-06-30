@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: cors,
                       policy =>
                       {
-                          policy.WithOrigins("https://hoilai.com",
+                          policy.WithOrigins("https://user.hoilai.com",
                                               "http://www.contoso.com");
                       });
 });
