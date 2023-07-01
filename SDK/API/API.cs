@@ -48,6 +48,12 @@ namespace SDK
             string message = string.Join(" ", values);
             Console.WriteLine($"[{timestamp}] {message}");
         }
+
+        /// <summary>
+        /// 返回一个字符串的小写32位加密md5
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string GetMD5 (string input)
         {
             using (var md5 = MD5.Create())
@@ -63,6 +69,16 @@ namespace SDK
                 return sb.ToString();
             }
         }
+
+        /// <summary>
+        /// 向指定邮箱发送指定邮件
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="toEmail"></param>
+        /// <param name="subject"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         public static bool SendMail (string email, string password, string toEmail, string subject, string body)
         {
             try
@@ -83,6 +99,12 @@ namespace SDK
                 return false; // 发送失败，返回 false
             }
         }
+
+        /// <summary>
+        /// 是SendMail()的扩展，本方法仅用于发送验证码
+        /// </summary>
+        /// <param name="toemail"></param>
+        /// <returns></returns>
         public static bool Getverification (string toemail)
         {
             try
@@ -101,6 +123,13 @@ namespace SDK
 
             }
         }
+
+        /// <summary>
+        /// 返回指定的数组
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public static T[] GetArray<T> (params T[] values)
         {
             T[] array = new T[values.Length];
@@ -110,6 +139,16 @@ namespace SDK
             }
             return array;
         }
+
+        /// <summary>
+        /// 判断一个字符串是邮箱地址，纯数字，还是其他。
+        /// 返回值：
+        /// -1：其他
+        /// 1：邮箱地址
+        /// 2：纯数字
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static int CheckString (string input)
         {
             // 检查字符串是否为邮箱地址
@@ -124,7 +163,11 @@ namespace SDK
             return -1;
         }
 
-        // 检查字符串是否为有效的邮箱地址
+        /// <summary>
+        /// 检查字符串是否为有效的邮箱地址
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public static bool IsValidEmail (string email)
         {
             // 使用合适的正则表达式来验证邮箱地址是否有效
@@ -134,7 +177,12 @@ namespace SDK
             return regex.IsMatch(email);
         }
 
-        // 检查字符串是否为纯数字
+
+        /// <summary>
+        /// 检查字符串是否为纯数字
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static bool IsNumeric (string input)
         {
             // 使用int.TryParse()方法将字符串尝试转换为整数
