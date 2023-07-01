@@ -4,6 +4,16 @@ using System.Data.SqlClient;
 public static class SQLT_Operate
 {
     //增
+
+    /// <summary>
+    /// 顾名思义，这是一个插入的方法。
+    /// 但是警告：不要使用该方法注册新用户！
+    /// 因为该方法在插入的时候不会检测是否已经存在插入数据，因此会出现重复用户！
+    /// </summary>
+    /// <param name="_Table_Name"></param>
+    /// <param name="_List_Name"></param>
+    /// <param name="_List_Value"></param>
+    /// <returns></returns>
     public static bool TSQL_ADD (string _Table_Name, string[] _List_Name, string[] _List_Value)
     {
         using (SqlConnection conn = SqlConnectionPool.GetConnection())

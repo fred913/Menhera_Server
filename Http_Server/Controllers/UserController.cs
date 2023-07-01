@@ -11,17 +11,20 @@ namespace Http_Server.Controllers
         public IEnumerable<string> UserLogin (string username, string password)
         {
             Users user = new Users("Users");
+            //目前仅支持邮箱地址登录，以后开放其他方式登录
+            //其他方式登录，只需要更改下面的$"EmailAddress = '{username.Trim()}'"，使用方法API.CheckString()就可以判断出登录方式
             if (!user.IsPassword($"EmailAddress = '{username.Trim()}'", password.Trim()))
             {
                 yield return "{status:false,msg:用户名或密码错误}";
             }
+
             yield return "{status:true}";
         }
         [HttpGet]
         public IEnumerable<string> UserRegister (string username, string password)
         {
             Users user = new Users("Users");
-            int num = user.SignUpNewUser(username, password);
+            int num = user.SignUpNewUser(username.Trim(), password.Trim());
             switch (num)
             {
                 case -1:
@@ -31,7 +34,7 @@ namespace Http_Server.Controllers
                     yield return "status:false,msg:注册失败，请联系管理员";
                     break;
                 default:
-                    yield return "{status:true,msg:注册成功}";
+                    yield return $"status:true,msg:注册成功，您的UID为：{num}";
                     break;
             }
         }
