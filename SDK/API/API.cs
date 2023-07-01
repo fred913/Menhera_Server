@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace SDK
+namespace SDK.API
 {
     public static class API
     {
@@ -47,6 +47,7 @@ namespace SDK
 
             string message = string.Join(" ", values);
             Console.WriteLine($"[{timestamp}] {message}");
+
         }
 
         /// <summary>
@@ -99,6 +100,27 @@ namespace SDK
                 return false; // 发送失败，返回 false
             }
         }
+        public static bool SendMail_Html (string email, string password, string toEmail, string subject, string body)
+        {
+            try
+            {
+                SmtpClient client = new SmtpClient("smtp.exmail.qq.com", 587);
+                client.EnableSsl = true;
+                client.Credentials = new NetworkCredential(email, password);
+                MailMessage mailMessage = new MailMessage(email, toEmail);
+                mailMessage.Subject = subject;
+                mailMessage.Body = body;
+                mailMessage.IsBodyHtml = true; // 设置邮件的内容为HTML格式
+                client.Send(mailMessage);
+
+                return true; // 发送成功，返回true
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"邮件发送失败: {ex.Message}");
+                return false; // 发送失败，返回false
+            }
+        }
 
         /// <summary>
         /// 是SendMail()的扩展，本方法仅用于发送验证码
@@ -110,8 +132,8 @@ namespace SDK
             try
             {
                 string verification = GetRandomInAB(100000, 999999).ToString();
-                SendMail("zhangzijian@menherachan.cn", "Cat.jiuzhong0910", toemail, "验证码", $"您的验证码为:{verification}");
-
+                //SendMail("zhangzijian@menherachan.cn", "Cat.jiuzhong0910", toemail, "验证码", $"您的验证码为:{verification}");
+                SendMail_Html("zhangzijian@menherachan.cn", "Cat.jiuzhong0910", toemail, "验证码", $"{Const.ConstData.EmailTxt_First}{verification}{Const.ConstData.EmailTxt_End}");
                 //  SQLAction sQLAction = new SQLAction("Zhangzijian\\SQLEXPRESS", "Menherachan_Pwms", "sa", "Menherachan0822");
                 //sQLAction.UpdateOrCreateData("Menherachan_CAPTCHA", new[] { "CAPTCHA" }, new[] { verification }, "Email = '" + toemail + "'");
                 return true;

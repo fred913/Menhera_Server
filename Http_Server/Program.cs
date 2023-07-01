@@ -1,20 +1,26 @@
-using SDK;
+using SDK.API;
 
 try
 {
+    /*
+     * .AllowAnyHeader().
+AllowAnyMethod().
+AllowCredentials()
+     */
     var builder = WebApplication.CreateBuilder(args);
     // Add services to the container.
     var cors = "mycors";
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
     builder.Services.AddCors(options =>
     {
         options.AddPolicy(name: cors,
                           policy =>
                           {
                               policy.WithOrigins("https://user.hoilai.com",
-                                                  "https://localhost:7213");
+                                                  "http://127.0.0.1:8848/Weblogin/index.html");
                           });
     });
 
@@ -27,7 +33,7 @@ try
         app.UseSwaggerUI();
     }
     app.UseHttpsRedirection();
-
+    app.UseRouting();
     app.UseCors(cors);
 
     app.UseAuthorization();

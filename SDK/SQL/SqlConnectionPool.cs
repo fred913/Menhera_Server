@@ -1,5 +1,4 @@
 ﻿using System.Data.SqlClient;
-
 namespace SDK.SQL
 {
     public class SqlConnectionPool
@@ -27,7 +26,8 @@ namespace SDK.SQL
             }
             catch (Exception ex)
             {
-                API.Print(ex.Message);
+                SDK.API.API.Print(ex.Message);
+
             }
 
         }

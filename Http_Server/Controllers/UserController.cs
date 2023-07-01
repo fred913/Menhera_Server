@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using SDK.API;
 using 服务器.GameSDKS;
 namespace Http_Server.Controllers
 {
@@ -11,14 +12,14 @@ namespace Http_Server.Controllers
         public IEnumerable<string> UserLogin (string username, string password)
         {
             Users user = new Users("Users");
+            API.Print(username, " ", password);
             //目前仅支持邮箱地址登录，以后开放其他方式登录
             //其他方式登录，只需要更改下面的$"EmailAddress = '{username.Trim()}'"，使用方法API.CheckString()就可以判断出登录方式
             if (!user.IsPassword($"EmailAddress = '{username.Trim()}'", password.Trim()))
             {
                 yield return "{status:false,msg:用户名或密码错误}";
             }
-
-            yield return "{status:true}";
+            else yield return "{status:true}";
         }
         [HttpGet]
         public IEnumerable<string> UserRegister (string username, string password)

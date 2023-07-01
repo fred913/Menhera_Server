@@ -1,5 +1,5 @@
 ﻿#pragma warning disable CS0164
-using SDK;
+using SDK.API;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -33,6 +33,7 @@ namespace ServerProgram
             }*/
 
             Test_User:
+
             //us.UpdateUserInfo("db_Users", 10001.ToString(), "UserName", "一水久钟");通过
 
             /*测试通过
@@ -40,7 +41,7 @@ namespace ServerProgram
         API.Print(Analysis.GetReturnMessage($"GetInfo&UID = 10001&f36bb8bcda27e0e0ceb6e4bc3a64a506&db_Users&UserName"));
             
             */
-            //API.Getverification("zhangzijian_itmail@yeah.net");
+            API.Getverification("zhangzijian_itmail@yeah.net");
             //sQLAction.InsertData("db_Users", t, t1);
             // sQLAction.UpdateOrCreateData("db_Users", t, t1, "UID = 10001");
             //API.Print(SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", t)[0]);
