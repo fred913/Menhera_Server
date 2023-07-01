@@ -2,10 +2,19 @@
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
+
 namespace SDK
 {
-    public class API
+    public static class API
     {
+
+        /// <summary>
+        /// 在[minA，maxB]中产生一个随机数，并返回它
+        /// </summary>
+        /// <param name="minA"></param>
+        /// <param name="maxB"></param>
+        /// <returns></returns>
         public static int GetRandomInAB (int minA, int maxB)
         {
             if (maxB > minA)
@@ -26,6 +35,11 @@ namespace SDK
                 return -1; // 返回 -1 表示参数无效
             }
         }
+
+        /// <summary>
+        /// 接管Console.WriteLine(...)
+        /// </summary>
+        /// <param name="values"></param>
         public static void Print (params object[] values)
         {
             DateTime now = DateTime.Now;
@@ -95,6 +109,37 @@ namespace SDK
                 array[i] = values[i];
             }
             return array;
+        }
+        public static int CheckString (string input)
+        {
+            // 检查字符串是否为邮箱地址
+            if (IsValidEmail(input))
+                return 1;
+
+            // 检查字符串是否为纯数字
+            if (IsNumeric(input))
+                return 2;
+
+            // 如果既不是邮箱地址也不是纯数字，则返回-1
+            return -1;
+        }
+
+        // 检查字符串是否为有效的邮箱地址
+        public static bool IsValidEmail (string email)
+        {
+            // 使用合适的正则表达式来验证邮箱地址是否有效
+            // 这里只是一个简单的示例，请使用更精确和完善的正则表达式
+            string pattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(email);
+        }
+
+        // 检查字符串是否为纯数字
+        public static bool IsNumeric (string input)
+        {
+            // 使用int.TryParse()方法将字符串尝试转换为整数
+            int number;
+            return int.TryParse(input, out number);
         }
     }
 }

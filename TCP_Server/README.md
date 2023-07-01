@@ -7,4 +7,3 @@ Menherachan_Pwms/Menherachan_Pwms
 
 ![%LS8T33$ER63_WPXS1840E8](https://user-images.githubusercontent.com/99536828/236617178-3fc1a2b8-111c-4fd5-b42b-9357a9161109.png)
 
-
