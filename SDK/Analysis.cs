@@ -99,8 +99,6 @@ namespace 服务器
                     API.Getverification(analysis[1]);
                 });
                 t.Start();
-                
-
             }
             return "False";
             // throw new NotImplementedException();
