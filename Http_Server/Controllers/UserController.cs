@@ -32,10 +32,10 @@ namespace Http_Server.Controllers
                     yield return "{status:false,msg:邮箱已经注册}";
                     break;
                 case -2:
-                    yield return "status:false,msg:注册失败，请联系管理员";
+                    yield return "status:false,msg:注册失败,请联系管理员";
                     break;
                 default:
-                    yield return $"status:true,msg:注册成功，您的UID为：{num}";
+                    yield return $"status:true,msg:注册成功,您的UID为,{num}";
                     break;
             }
         }
