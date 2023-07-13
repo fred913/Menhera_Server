@@ -1,5 +1,5 @@
 ﻿
-using SDK.SQL;
+using SDK.SQL.SqlConnectionPool;
 using System.Data.SqlClient;
 
 namespace 服务器.GameSDKS

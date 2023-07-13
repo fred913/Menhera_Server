@@ -1,5 +1,5 @@
 ﻿using System.Data.SqlClient;
-namespace SDK.SQL
+namespace SDK.SQL.SqlConnectionPool
 {
     public class SqlConnectionPool
     {
