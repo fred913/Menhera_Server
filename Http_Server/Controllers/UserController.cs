@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SDK.API;
-using ·şÎñÆ÷.GameSDKS;
+using æœåŠ¡å™¨.GameSDKS;
 namespace Http_Server.Controllers
 {
     [ApiController]
@@ -13,11 +13,11 @@ namespace Http_Server.Controllers
         {
             Users user = new Users("Users");
             API.Print(username, " ", password);
-            //Ä¿Ç°½öÖ§³ÖÓÊÏäµØÖ·µÇÂ¼£¬ÒÔºó¿ª·ÅÆäËû·½Ê½µÇÂ¼
-            //ÆäËû·½Ê½µÇÂ¼£¬Ö»ĞèÒª¸ü¸ÄÏÂÃæµÄ$"EmailAddress = '{username.Trim()}'"£¬Ê¹ÓÃ·½·¨API.CheckString()¾Í¿ÉÒÔÅĞ¶Ï³öµÇÂ¼·½Ê½
+            //ç›®å‰ä»…æ”¯æŒé‚®ç®±åœ°å€ç™»å½•ï¼Œä»¥åå¼€æ”¾å…¶ä»–æ–¹å¼ç™»å½•
+            //å…¶ä»–æ–¹å¼ç™»å½•ï¼Œåªéœ€è¦æ›´æ”¹ä¸‹é¢çš„$"EmailAddress = '{username.Trim()}'"ï¼Œä½¿ç”¨æ–¹æ³•API.CheckString()å°±å¯ä»¥åˆ¤æ–­å‡ºç™»å½•æ–¹å¼
             if (!user.IsPassword($"EmailAddress = '{username.Trim()}'", password.Trim()))
             {
-                yield return "{status:false,msg:ÓÃ»§Ãû»òÃÜÂë´íÎó}";
+                yield return "{status:false,msg:ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯}";
             }
             else yield return "{status:true}";
         }
@@ -29,13 +29,13 @@ namespace Http_Server.Controllers
             switch (num)
             {
                 case -1:
-                    yield return "{status:false,msg:ÓÊÏäÒÑ¾­×¢²á}";
+                    yield return "{status:false,msg:é‚®ç®±å·²ç»æ³¨å†Œ}";
                     break;
                 case -2:
-                    yield return "status:false,msg:×¢²áÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±";
+                    yield return "status:false,msg:æ³¨å†Œå¤±è´¥,è¯·è”ç³»ç®¡ç†å‘˜";
                     break;
                 default:
-                    yield return $"status:true,msg:×¢²á³É¹¦£¬ÄúµÄUIDÎª£º{num}";
+                    yield return $"status:true,msg:æ³¨å†ŒæˆåŠŸ,æ‚¨çš„UIDä¸º,{num}";
                     break;
             }
         }

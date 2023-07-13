@@ -2,11 +2,6 @@ using SDK.API;
 
 try
 {
-    /*
-     * .AllowAnyHeader().
-AllowAnyMethod().
-AllowCredentials()
-     */
     var builder = WebApplication.CreateBuilder(args);
     // Add services to the container.
     var cors = "mycors";
@@ -19,7 +14,7 @@ AllowCredentials()
         options.AddPolicy(name: cors,
                           policy =>
                           {
-                              policy.WithOrigins("https://user.hoilai.com",
+                              policy.WithOrigins("https://api.hoilai.com",
                                                   "http://127.0.0.1:8848/Weblogin/index.html");
                           });
     });
