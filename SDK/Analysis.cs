@@ -88,7 +88,7 @@ namespace 服务器
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        private static bool Sendverification (string message)
+        private static string Sendverification (string message)
         {
             string[] analysis = message.Split('&');
             //analysis[1]是要发送到的邮箱
@@ -97,15 +97,16 @@ namespace 服务器
                 try
                 {
                     //return API.SendMail("zhangzijian@menherachan.cn", "Menherachan0822", analysis[1], "您正在参与验证码服务", "您的验证码为:" + API.GetRandomInAB(100000, 999999)).ToString();
-                    Thread t = new Thread(()=>{API.Getverification(analysis[1]);});
+                    Thread t = new Thread(() => { API.Getverification(analysis[1]); });
                     t.Start();
+                    return true.ToString();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     API.Print(ex.Message);
                 }
             }
-            return "False";
+            return false.ToString();
             // throw new NotImplementedException();
         }
 
