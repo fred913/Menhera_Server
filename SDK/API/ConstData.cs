@@ -1,4 +1,4 @@
-﻿namespace SDK.Const
+﻿namespace SDK
 {
     public class ConstData
     {

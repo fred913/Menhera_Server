@@ -2,7 +2,7 @@
 using SDK.SQL.SqlConnectionPool;
 using System.Data.SqlClient;
 
-namespace 服务器.GameSDKS
+namespace SDKS.GameSDKS
 {
     public class Users
     {

@@ -26,7 +26,7 @@ namespace SDK.SQL.SqlConnectionPool
             }
             catch (Exception ex)
             {
-                SDK.API.API.Print(ex.Message);
+                SDK.API.Print(ex.Message);
 
             }
 

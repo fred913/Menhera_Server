@@ -1,4 +1,5 @@
-using SDK.API;
+
+using SDK;
 
 try
 {
@@ -15,10 +16,10 @@ try
                           policy =>
                           {
                               policy.WithOrigins("https://api.hoilai.com",
+                                                    "https://user.hoilai.com",
                                                   "http://127.0.0.1:8848/Weblogin/index.html");
                           });
     });
-
     var app = builder.Build();
 
     // Configure the HTTP request pipeline. 

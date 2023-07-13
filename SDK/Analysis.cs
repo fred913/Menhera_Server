@@ -1,6 +1,7 @@
-﻿using SDK.API;
-using 服务器.GameSDKS;
-using 服务器.SQL;
+﻿using SDK;
+using SDKS.GameSDKS;
+using SQl;
+using SQL;
 
 namespace 服务器
 {

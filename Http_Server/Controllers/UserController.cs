@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using SDK.API;
-using 服务器.GameSDKS;
+using SDK;
+using SDKS.GameSDKS;
+
 namespace Http_Server.Controllers
 {
     [ApiController]

@@ -1,12 +1,12 @@
 ﻿#pragma warning disable CS0164
-using SDK.API;
+using SDK;
+using SDKS.GameSDKS;
+using SQL;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using TCP_Server.TCPClient;
 using 服务器;
-using 服务器.GameSDKS;
-using 服务器.SQL;
 
 namespace ServerProgram
 {
@@ -45,7 +45,7 @@ namespace ServerProgram
             // sQLAction.UpdateOrCreateData("db_Users", t, t1, "UID = 10001");
             //API.Print(SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", t)[0]);
             //API.SendMail("mail@menherachan");
-            API.Print(Analysis.GetReturnMessage($"Sendverification&zhangzijian_itmail@yeah.net"));
+            //API.Print(Analysis.GetReturnMessage($"Sendverification&zhangzijian_itmail@yeah.net"));
 
 
 

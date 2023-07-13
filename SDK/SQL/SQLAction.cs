@@ -1,7 +1,7 @@
 ﻿using SDK.SQL.SqlConnectionPool;
 using System.Data.SqlClient;
 
-namespace 服务器.SQL
+namespace SQL
 {
     public class SQLAction
     {
