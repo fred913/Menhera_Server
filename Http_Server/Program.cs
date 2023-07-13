@@ -17,7 +17,10 @@ try
                           {
                               policy.WithOrigins("https://api.hoilai.com",
                                                     "https://user.hoilai.com",
-                                                  "http://127.0.0.1:8848/Weblogin/index.html");
+                                                  "http://127.0.0.1");
+                              policy.AllowAnyHeader();
+                              policy.AllowAnyMethod();
+                              policy.AllowCredentials();
                           });
     });
     var app = builder.Build();
