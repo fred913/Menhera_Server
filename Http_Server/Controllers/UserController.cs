@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SDK;
-using SDKS.GameSDKS;
+using SDK.GameSDKS;
 
 namespace Http_Server.Controllers
 {

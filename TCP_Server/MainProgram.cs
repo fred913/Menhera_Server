@@ -1,6 +1,6 @@
 ﻿#pragma warning disable CS0164
 using SDK;
-using SDKS.GameSDKS;
+using SDK.GameSDKS;
 using SQL;
 using System.Net;
 using System.Net.Sockets;
@@ -12,7 +12,7 @@ namespace ServerProgram
 {
     public class Program
     {
-        static List<ClientInfo> clients = new List<ClientInfo>();
+        public static List<ClientInfo> clients = new List<ClientInfo>();
 
         public static void Main (string[] args)
         {
@@ -45,7 +45,7 @@ namespace ServerProgram
             // sQLAction.UpdateOrCreateData("db_Users", t, t1, "UID = 10001");
             //API.Print(SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", t)[0]);
             //API.SendMail("mail@menherachan");
-            API.Print(Analysis.GetReturnMessage($"Sendverification&3563640373@qq.com"));
+            //API.Print(Analysis.GetReturnMessage($"Sendverification&3563640373@qq.com"));
 
 
 
@@ -57,8 +57,8 @@ namespace ServerProgram
         public static void StartServer ()
         {
 
-            TcpListener listener = new TcpListener(IPAddress.Any, 822);
-            //TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 822);
+            //TcpListener listener = new TcpListener(IPAddress.Any, 822);
+            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 822);
             listener.Start();
 
             API.Print("Server started.");
@@ -74,6 +74,7 @@ namespace ServerProgram
             }
 
         }
+
 
         public static void HandleClient (ClientInfo client)
         {

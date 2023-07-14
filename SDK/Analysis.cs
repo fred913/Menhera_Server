@@ -1,5 +1,5 @@
 ﻿using SDK;
-using SDKS.GameSDKS;
+using SDK.GameSDKS;
 using SQl;
 using SQL;
 

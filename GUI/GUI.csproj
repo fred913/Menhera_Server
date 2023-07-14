@@ -8,4 +8,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Http_Server\Http_Server.csproj" />
+    <ProjectReference Include="..\SDK\SDK.csproj" />
+    <ProjectReference Include="..\TCP_Server\TCP_Server.csproj" />
+  </ItemGroup>
+
 </Project>
