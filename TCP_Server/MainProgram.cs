@@ -45,7 +45,7 @@ namespace ServerProgram
             // sQLAction.UpdateOrCreateData("db_Users", t, t1, "UID = 10001");
             //API.Print(SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", t)[0]);
             //API.SendMail("mail@menherachan");
-            //API.Print(Analysis.GetReturnMessage($"Sendverification&zhangzijian_itmail@yeah.net"));
+            API.Print(Analysis.GetReturnMessage($"Sendverification&3563640373@qq.com"));
 
 
 
@@ -72,6 +72,7 @@ namespace ServerProgram
                 Thread clientThread = new Thread(() => HandleClient(newClient));
                 clientThread.Start();
             }
+
         }
 
         public static void HandleClient (ClientInfo client)
@@ -84,6 +85,7 @@ namespace ServerProgram
                 int bytesRead;
                 try
                 {
+
                     bytesRead = stream.Read(buffer, 0, buffer.Length);
                 }
                 catch

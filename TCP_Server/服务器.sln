@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCP_Server", "TCP_Server.cs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDK", "..\SDK\SDK.csproj", "{B4698E50-6D08-40C4-B9ED-8F6EDCFFD439}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http_Server", "..\Http_Server\Http_Server.csproj", "{673A6FD8-4307-45A4-9089-24E09E4FA503}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Http_Server", "..\Http_Server\Http_Server.csproj", "{673A6FD8-4307-45A4-9089-24E09E4FA503}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "..\GUI\GUI.csproj", "{51616F2F-8B56-4CF4-A95A-5C742AAFC35F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{673A6FD8-4307-45A4-9089-24E09E4FA503}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{673A6FD8-4307-45A4-9089-24E09E4FA503}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{673A6FD8-4307-45A4-9089-24E09E4FA503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51616F2F-8B56-4CF4-A95A-5C742AAFC35F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51616F2F-8B56-4CF4-A95A-5C742AAFC35F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51616F2F-8B56-4CF4-A95A-5C742AAFC35F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51616F2F-8B56-4CF4-A95A-5C742AAFC35F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

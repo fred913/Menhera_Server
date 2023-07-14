@@ -192,8 +192,7 @@ namespace SDK
         /// <returns></returns>
         public static bool IsValidEmail (string email)
         {
-            // 使用合适的正则表达式来验证邮箱地址是否有效
-            // 这里只是一个简单的示例，请使用更精确和完善的正则表达式
+            // 使用正则表达式来验证邮箱地址是否有效
             string pattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$";
             Regex regex = new Regex(pattern);
             return regex.IsMatch(email);
