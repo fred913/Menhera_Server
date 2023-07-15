@@ -133,7 +133,7 @@ namespace SDK
             {
                 string verification = GetRandomInAB(100000, 999999).ToString();
                 //SendMail("zhangzijian@menherachan.cn", "Cat.jiuzhong0910", toemail, "验证码", $"您的验证码为:{verification}");
-                SendMail_Html("zhangzijian@menherachan.cn", "Cat.jiuzhong0910", toemail, "验证码", $"{ConstData.EmailTxt_First}{verification}{ConstData.EmailTxt_End}");
+                SendMail_Html("zhangzijian@menherachan.cn", "Cat.jiuzhong0910", toemail, "验证码", $"{ConstData.EmailTxt_验证码_First}{verification}{ConstData.EmailTxt_验证码_End}");
                 //  SQLAction sQLAction = new SQLAction("Zhangzijian\\SQLEXPRESS", "Menherachan_Pwms", "sa", "Menherachan0822");
                 //sQLAction.UpdateOrCreateData("Menherachan_CAPTCHA", new[] { "CAPTCHA" }, new[] { verification }, "Email = '" + toemail + "'");
                 return true;
