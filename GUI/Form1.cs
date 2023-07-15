@@ -38,6 +38,7 @@ namespace GUI
 
             }
         }
+
         public string FormatText_email (string input)
         {
             string[] lines = input.Split(Environment.NewLine); // 使用新行进行分割
