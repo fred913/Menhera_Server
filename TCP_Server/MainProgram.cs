@@ -57,8 +57,8 @@ namespace ServerProgram
         public static void StartServer ()
         {
 
-            //TcpListener listener = new TcpListener(IPAddress.Any, 822);
-            TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 822);
+            TcpListener listener = new TcpListener(IPAddress.Any, 822);
+            //TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 822);
             listener.Start();
 
             API.Print("Server started.");
