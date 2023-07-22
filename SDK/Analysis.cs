@@ -7,57 +7,10 @@ namespace SDk
 {
     public static class Analysis
     {
+
         public const char endl = '\n';
 
-        /*
-        public static string GetReturnMessage (string message)
-        {
-            switch (message)
-            {
-                case "Ver":
-                    return "0.1.0";
-                case "News":
 
-                    return "胡桃日记(Menherachan)最新版本来啦" + endl + "1.账号的加入。";
-                default:
-                    string[] analysis = message.Split('&'); var sQLAction = new SQLAction("Users"); var us = new Users("Users");
-                    switch (analysis[0])
-                    {
-                        case "SignUp"://SignUp&email&password&name
-
-                            return us.SignUpNewUser(analysis[1], API.GetMD5(analysis[2]), analysis[3]).ToString();
-
-                        case "Login"://Login&email&password
-
-                            string returnres = sQLAction.SelectData("db_Users", API.GetArray<string>("UID", "PassWord"), $"EmailAddress = {analysis[1]}");
-                            if (returnres.Split("&")[1] == API.GetMD5(analysis[2]))
-                            {
-                                return returnres.Split("&")[0];
-                            }
-                            else
-                            {
-                                return "账号或密码错误";
-                            }
-
-                        case "GetInfo"://GetInfo&condition&password&info
-
-                            //condition UID = 10001
-                            if ()
-
-
-
-
-                                return sQLAction.SelectData("db_Users", API.GetArray<string>(analysis[3]), analysis[1]);
-
-                        default:
-                            return "Error";
-                    }
-
-
-            }
-
-        }
-        */
         public static string GetReturnMessage (string message)
         {
             //改为集合的方法
@@ -69,6 +22,7 @@ namespace SDk
                 {"GetInfo", Getinfo},
                 {"UpdateInfo",UpdateInfo},
                 { "Sendverification",Sendverification}
+
         };
             var parts = message.Split('&');
             var actionName = parts[0];
