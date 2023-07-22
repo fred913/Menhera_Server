@@ -14,5 +14,10 @@ namespace Http_Server.Controllers
 
             yield return $"status:true,res:{_res}";
         }
+        [HttpPost]
+        public IEnumerable<string> Post_Test (string action)
+        {
+            yield return $"status:true,res:Hello World！";
+        }
     }
 }
