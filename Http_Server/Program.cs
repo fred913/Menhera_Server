@@ -17,7 +17,8 @@ try
                           {
                               policy.WithOrigins("https://api.hoilai.com",
                                                     "https://user.hoilai.com",
-                                                  "http://127.0.0.1");
+                                                  "http://127.0.0.1"
+                                                  , "https://api.nanasekurumi.top");
                               policy.AllowAnyHeader();
                               policy.AllowAnyMethod();
                               policy.AllowCredentials();
@@ -31,7 +32,7 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
-    app.UseHttpsRedirection();
+    //app.UseHttpsRedirection();
     app.UseRouting();
     app.UseCors(cors);
 

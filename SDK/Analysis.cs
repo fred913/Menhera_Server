@@ -3,7 +3,7 @@ using SDK.GameSDKS;
 using SQl;
 using SQL;
 
-namespace 服务器
+namespace SDk
 {
     public static class Analysis
     {

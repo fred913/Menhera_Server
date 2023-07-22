@@ -1,4 +1,5 @@
 ﻿#pragma warning disable CS0164
+using SDk;
 using SDK;
 using SDK.GameSDKS;
 using SQL;
@@ -6,7 +7,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using TCP_Server.TCPClient;
-using 服务器;
 
 namespace ServerProgram
 {
@@ -72,10 +72,7 @@ namespace ServerProgram
                 Thread clientThread = new Thread(() => HandleClient(newClient));
                 clientThread.Start();
             }
-
         }
-
-
         public static void HandleClient (ClientInfo client)
         {
             NetworkStream stream = client.TcpClient.GetStream();
