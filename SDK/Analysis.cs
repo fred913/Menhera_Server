@@ -59,6 +59,7 @@ namespace SDk
                 catch (Exception ex)
                 {
                     API.Print(ex.Message);
+                    return false.ToString();
                 }
             }
             return false.ToString();
