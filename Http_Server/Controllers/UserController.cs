@@ -8,14 +8,14 @@ namespace Http_Server.Controllers
     {
 
         [HttpPost]
-        public IEnumerable<string> Post_HOiLAI (string action)
+        public IEnumerable<string> Post_HOiLAI ([FromForm] string action)
         {
             string _res = Analysis.GetReturnMessage(action);
 
-            yield return $"status:true,res:{_res}";
+            yield return _res;
         }
         [HttpPost]
-        public IEnumerable<string> Post_Test (string action)
+        public IEnumerable<string> Post_Test ()
         {
             yield return $"status:true,res:Hello World！";
         }
