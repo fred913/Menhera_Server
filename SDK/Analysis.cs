@@ -65,7 +65,6 @@ namespace SDk
             return false.ToString();
             // throw new NotImplementedException();
         }
-
         private static string GetVersion (string message)
         {
             var ini = new SDK.INIFile("config.ini");
