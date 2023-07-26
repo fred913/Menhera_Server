@@ -22,7 +22,7 @@ namespace ServerProgram
             var us = new Users("Users");
             //API.Print(sQLAction.SelectData("db_Users", t, "UID = 10001"));
             //API.Print(sQLAction.SelectData("db_Users", t, "UID = 10001"));
-
+            //UpdateInfo
             Test_SQLT_Operate:
             //测试通过
             //SQLT_Operate.TSQL_Update("db_Users", "UID = 10001", API.GetArray<string>("UserName"), API.GetArray<string>("一水"));

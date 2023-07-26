@@ -52,18 +52,18 @@ namespace SDK.GameSDKS
         // <summary>
         /// 更新用户信息。
         /// </summary>
-        /// <param name="id">需要更新的用户 ID。</param>
+        /// <param name="condition">条件</param>
         /// <param name="columnName">需要更新的列名。</param>
         /// <param name="columnValue">新的列值。</param>
         /// <returns>返回一个标志值，表示更新操作是否成功。</returns>
-        public bool UpdateUserInfo (string tablename, string id, string columnName, string columnValue)
+        public bool UpdateUserInfo (string tablename, string condition, string columnName, string columnValue)
         {
             using (var connection = SqlConnectionPool.GetConnection())
             {
                 connection.Open();
 
                 // 检查该 ID 是否存在
-                var checkCommand = new SqlCommand($"SELECT COUNT(*) FROM {tablename} WHERE UID={id}", connection);
+                var checkCommand = new SqlCommand($"SELECT COUNT(*) FROM {tablename} WHERE {condition}", connection);
                 int count = (int)checkCommand.ExecuteScalar();
                 if (count == 0)
                 {
@@ -74,7 +74,7 @@ namespace SDK.GameSDKS
 
                 // 更新用户信息
 
-                var updateCommand = new SqlCommand($"UPDATE {tablename} SET {columnName}=@value WHERE UID={id}", connection);
+                var updateCommand = new SqlCommand($"UPDATE {tablename} SET {columnName}=@value WHERE {condition}", connection);
                 updateCommand.Parameters.AddWithValue("@value", columnValue);
                 int rowsAffected = updateCommand.ExecuteNonQuery();
                 if (rowsAffected == 0)

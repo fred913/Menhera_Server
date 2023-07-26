@@ -14,14 +14,16 @@ namespace SDk
         public static string GetReturnMessage (string message)
         {
             //改为集合的方法
-            var actions = new Dictionary<string, Func<string, string>>() {
+            var actions = new Dictionary<string, Func<string, string>>()
+            {
                 { "Ver", GetVersion },
                 { "News", GetNews },
                 { "SignUp", SignUp },
                 { "Login", Login },
                 {"GetInfo", Getinfo},
                 {"UpdateInfo",UpdateInfo},
-                { "Sendverification",Sendverification}
+                { "Sendverification",Sendverification},
+                { "ResettingPassword",ResettingPassword}
 
         };
             var parts = message.Split('&');
@@ -125,16 +127,23 @@ namespace SDk
         /// <returns></returns>
         private static string Getinfo (string message)
         {
+            try
+            {
+                string[] analysis = message.Split('&'); var sQLAction = new SQLAction("Users"); var user = new Users("Users"); string[] t = new string[] { analysis[4] };
+                if (!user.IsPassword(analysis[1], analysis[2]))
+                {
+                    return "账号或密码错误";
+                }
+                else
+                {
+                    return sQLAction.SelectData(analysis[3], t, analysis[1]);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
 
-            string[] analysis = message.Split('&'); var sQLAction = new SQLAction("Users"); var user = new Users("Users"); string[] t = new string[] { analysis[4] };
-            if (!user.IsPassword(analysis[1], analysis[2]))
-            {
-                return "账号或密码错误";
-            }
-            else
-            {
-                return sQLAction.SelectData(analysis[3], t, analysis[1]);
-            }
         }
 
         /// <summary>
@@ -166,5 +175,29 @@ namespace SDk
             }
         }
 
+        /// <summary>
+        /// 重置账户密码
+        ///ResettingPassword&条件&原来的密码&新密码
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private static string ResettingPassword (string message)
+        {
+            try
+            {
+                string[] analysis = message.Split('&');
+                var user = new Users("Users");
+                if (user.IsPassword(analysis[1], analysis[2]))
+                {
+                    return user.UpdateUserInfo("db_Users", analysis[1], "PassWord", analysis[3]).ToString();
+                }
+                else return "账号或密码错误";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+        }
     }
 }
