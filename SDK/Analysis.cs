@@ -225,29 +225,38 @@ namespace SDk
         {
             try
             {
+                var user = new Users("Users");
                 string[] analysis = message.Split('&');
-                List<string> userinfo = SQLT_Operate.TSQL_Read("db_Users", analysis[1], API.GetArray("UserName", "EmailAddress", "QQ", "isEnable", "Gender_Sex"));
-                API.Print(userinfo[0]);
-                var userInfo = new UserInfo
+                if (user.IsPassword(analysis[1], analysis[2]))
                 {
-                    UserName = userinfo[0],
-                    EmailAddress = userinfo[1],
-                    QQ = userinfo[2],
-                    isEnable = userinfo[3]
-                };
+                    List<string> userinfo = SQLT_Operate.TSQL_Read("db_Users", analysis[1], API.GetArray("UserName", "EmailAddress", "QQ", "isEnable", "Gender_Sex"));
+                    API.Print(userinfo[0]);
+                    var userInfo = new UserInfo
+                    {
+                        UserName = userinfo[0],
+                        EmailAddress = userinfo[1],
+                        QQ = userinfo[2],
+                        isEnable = userinfo[3]
+                    };
 
-                var options = new JsonSerializerOptions
+                    var options = new JsonSerializerOptions
+                    {
+                        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                        WriteIndented = true
+                    };
+                    string json = JsonSerializer.Serialize(userInfo, options);
+                    API.Print(json);
+                    return json;
+                }
+                else
                 {
-                    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                    WriteIndented = true
-                };
-                string json = JsonSerializer.Serialize(userInfo, options);
-                API.Print(json);
-                return json;
+                    return (-1).ToString();//密码错误
+                }
+
             }
             catch
             {
-                return (-1).ToString();
+                return (-2).ToString();//系统出错
             }
         }
 
