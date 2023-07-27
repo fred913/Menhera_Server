@@ -16,7 +16,7 @@ namespace ServerProgram
 
         public static void Main (string[] args)
         {
-            string[] t = new string[] { "PassWord" };
+            string[] t = new string[] { "PassWord", "UserName" };
             string[] t1 = new string[] { "一水" };
             var sQLAction = new SQLAction("Users");
             var us = new Users("Users");
@@ -26,8 +26,8 @@ namespace ServerProgram
             Test_SQLT_Operate:
             //测试通过
             //SQLT_Operate.TSQL_Update("db_Users", "UID = 10001", API.GetArray<string>("UserName"), API.GetArray<string>("一水"));
-            /*测试通过，返回的是数组
-            foreach (var item in SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", API.GetArray<string>("UserName")))
+            /*
+            foreach (var item in SQl.SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", t))
             {
                 API.Print(item);
             }*/
@@ -37,8 +37,9 @@ namespace ServerProgram
 
             /*测试通过
         API.Print(Analysis.GetReturnMessage($"UpdateInfo&UID = 10001&f36bb8bcda27e0e0ceb6e4bc3a64a506&UserName&一水久"));
-        API.Print(Analysis.GetReturnMessage($"GetInfo&UID = 10001&f36bb8bcda27e0e0ceb6e4bc3a64a506&db_Users&UserName"));
+             API.Print(Analysis.GetReturnMessage($"GetInfo&UID = 10001&f36bb8bcda27e0e0ceb6e4bc3a64a506&db_Users&UserName"));
             
+
             */
             ///API.Getverification("zhangzijian_itmail@yeah.net");
             //sQLAction.InsertData("db_Users", t, t1);
@@ -46,9 +47,9 @@ namespace ServerProgram
             //API.Print(SQLT_Operate.TSQL_Read<string>("db_Users", "UID = 10001", t)[0]);
             //API.SendMail("mail@menherachan");
             //API.Print(Analysis.GetReturnMessage($"Sendverification&3563640373@qq.com"));
+            //UpdateUserInfo
 
-
-
+            API.Print(Analysis.GetReturnMessage($"GetUserInfo&UID = 10001&f36bb8bcda27e0e0ceb6e4bc3a64a506"));
 
             StartServer();
 

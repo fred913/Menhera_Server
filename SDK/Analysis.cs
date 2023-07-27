@@ -1,8 +1,9 @@
 ﻿using SDK;
 using SDK.GameSDKS;
-using SQl;
 using SQL;
+using System.Text.Encodings.Web;
 
+using System.Text.Json;
 namespace SDk
 {
     public static class Analysis
@@ -23,7 +24,8 @@ namespace SDk
                 {"GetInfo", Getinfo},
                 {"UpdateInfo",UpdateInfo},
                 { "Sendverification",Sendverification},
-                { "ResettingPassword",ResettingPassword}
+                { "ResettingPassword",ResettingPassword},
+                { "GetUserInfo",GetUserInfo}
 
         };
             var parts = message.Split('&');
@@ -122,6 +124,7 @@ namespace SDk
         }
         /// <summary>
         /// Getinfo&condition&password&tablename&getname
+        /// -1:账号或密码错误
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
@@ -156,15 +159,20 @@ namespace SDk
             string[] analysis = message.Split('&'); var user = new Users("Users");
             if (!user.IsPassword(analysis[1], analysis[2]))
             {
-                return "账号或密码错误";
+                return (-1).ToString();
 
             }
             else
             {
                 try
                 {
+                    if (SQLT_Operate.TSQL_Update(analysis[5], analysis[1], API.GetArray(analysis[3]), API.GetArray(analysis[4])))
+                    {
 
-                    return SQLT_Operate.TSQL_Update(analysis[5], analysis[1], API.GetArray(analysis[3]), API.GetArray(analysis[4])).ToString();
+                        return 1.ToString();
+
+                    }
+                    else return 0.ToString();
                     //return user.UpdateUserInfo("db_Menherachan", analysis[1], analysis[3], analysis[4]).ToString();
                 }
                 catch (Exception ex)
@@ -178,6 +186,9 @@ namespace SDk
         /// <summary>
         /// 重置账户密码
         ///ResettingPassword&条件&原来的密码&新密码
+        ///-1:账号或密码错误
+        ///1:修改成功
+        ///0:修改失败
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
@@ -189,9 +200,14 @@ namespace SDk
                 var user = new Users("Users");
                 if (user.IsPassword(analysis[1], analysis[2]))
                 {
-                    return user.UpdateUserInfo("db_Users", analysis[1], "PassWord", analysis[3]).ToString();
+                    if (user.UpdateUserInfo("db_Users", analysis[1], "PassWord", analysis[3]))
+                    {
+                        return 1.ToString();
+                    }
+                    else return 0.ToString();
+
                 }
-                else return "账号或密码错误";
+                else return (-1).ToString();
             }
             catch (Exception ex)
             {
@@ -199,5 +215,41 @@ namespace SDk
             }
 
         }
+        /// <summary>
+        /// 获取用户信息
+        /// GetUserInfo & 条件 & 密码
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private static string GetUserInfo (string message)
+        {
+            try
+            {
+                string[] analysis = message.Split('&');
+                List<string> userinfo = SQLT_Operate.TSQL_Read("db_Users", analysis[1], API.GetArray("UserName", "EmailAddress", "QQ", "isEnable", "Gender_Sex"));
+                API.Print(userinfo[0]);
+                var userInfo = new UserInfo
+                {
+                    UserName = userinfo[0],
+                    EmailAddress = userinfo[1],
+                    QQ = userinfo[2],
+                    isEnable = userinfo[3]
+                };
+
+                var options = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                    WriteIndented = true
+                };
+                string json = JsonSerializer.Serialize(userInfo, options);
+                API.Print(json);
+                return json;
+            }
+            catch
+            {
+                return (-1).ToString();
+            }
+        }
+
     }
 }
