@@ -234,7 +234,8 @@ namespace SDk
                         UserName = userinfo[0],
                         EmailAddress = userinfo[1],
                         QQ = userinfo[2],
-                        isEnable = userinfo[3]
+                        isEnable = userinfo[3],
+                        Gender_Sex = userinfo[4]
                     };
 
                     var options = new JsonSerializerOptions
