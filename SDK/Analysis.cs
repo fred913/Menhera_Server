@@ -25,7 +25,8 @@ namespace SDk
                 {"UpdateInfo",UpdateInfo},
                 { "Sendverification",Sendverification},
                 { "ResettingPassword",ResettingPassword},
-                { "GetUserInfo",GetUserInfo}
+                { "GetUserInfo",GetUserInfo},
+                { "UpdateUserInfo",UpdateUserInfo}
 
         };
             var parts = message.Split('&');
@@ -160,7 +161,6 @@ namespace SDk
             if (!user.IsPassword(analysis[1], analysis[2]))
             {
                 return (-1).ToString();
-
             }
             else
             {
@@ -170,7 +170,6 @@ namespace SDk
                     {
 
                         return 1.ToString();
-
                     }
                     else return 0.ToString();
                     //return user.UpdateUserInfo("db_Menherachan", analysis[1], analysis[3], analysis[4]).ToString();
@@ -179,7 +178,6 @@ namespace SDk
                 {
                     return ex.Message;
                 }
-
             }
         }
 
@@ -258,6 +256,15 @@ namespace SDk
             {
                 return (-2).ToString();//系统出错
             }
+        }
+        /// <summary>
+        /// 与UpdateInfo不同的是，这个方法要更改只能更改全部的，扩展性不好
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private static string UpdateUserInfo (string message)
+        {
+            return "-1";
         }
 
     }
