@@ -259,13 +259,38 @@ namespace SDk
             }
         }
         /// <summary>
-        /// 与UpdateInfo不同的是，这个方法要更改只能更改全部的，扩展性不好
+        /// 
+        ///  UpdateInfo & condition(UID) & password & tablename & Listname & value 
+        ///  其中，& Listname & value 使用,拼接|拼接
+        ///  -1:密码错误
+        ///  0:系统错误
+        ///  1:操作成功
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
         private static string UpdateUserInfo (string message)
         {
-            return "-1";
+            string[] analysis = message.Split('&'); var user = new Users("Users");
+            if (!user.IsPassword(analysis[1], analysis[2]))
+            {
+                return (-1).ToString();
+            }
+            else
+            {
+                try
+                {// //UpdateInfo&UID = 10001&f36bb8bcda27e0e0ceb6e4bc3a64a506&db_Users&UserName&一水久钟
+                    if (SQLT_Operate.TSQL_Update(analysis[3], analysis[1], analysis[4].Split('|'), analysis[5].Split('|')))
+                    {
+
+                        return 1.ToString();
+                    }
+                    else return 0.ToString();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
         }
 
     }

@@ -16,6 +16,9 @@ namespace ServerProgram
 
         public static void Main (string[] args)
         {
+            Console.WriteLine("                   _ooOoo_\r\n                  o8888888o\r\n                  88\" . \"88\r\n                  (| -_- |)\r\n                  O\\  =  /O\r\n               ____/`---'\\____\r\n             .'  \\\\|     |//  `.\r\n            /  \\\\|||  :  |||//  \\\r\n           /  _||||| -:- |||||-  \\\r\n           |   | \\\\\\  -  /// |   |\r\n           | \\_|  ''\\---/''  |   |\r\n           \\  .-\\__  `-`  ___/-. /\r\n         ___`. .'  /--.--\\  `. . __\r\n      .\"\" '<  `.___\\_<|>_/___.'  >'\"\".\r\n     | | :  `- \\`.;`\\ _ /`;.`/ - ` : | |\r\n     \\  \\ `-.   \\_ __\\ /__ _/   .-` /  /\r\n======`-.____`-.___\\_____/___.-`____.-'======\r\n                   `=---='\r\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n            佛祖保佑       永无BUG");
+            Console.WriteLine("TCP - 服务器编号：01251");
+            Console.WriteLine("正在尝试启动....");
             string[] t = new string[] { "PassWord", "UserName" };
             string[] t1 = new string[] { "一水" };
             var sQLAction = new SQLAction("Users");
@@ -49,7 +52,7 @@ namespace ServerProgram
             //API.Print(Analysis.GetReturnMessage($"Sendverification&3563640373@qq.com"));
             //UpdateUserInfo
 
-            API.Print(Analysis.GetReturnMessage($"GetUserInfo&UID = 10001&f36bb8bcda27e0e0ceb6e4bc3a64a506"));
+            // API.Print(Analysis.GetReturnMessage($"UpdateUserInfo&UID = 10001&f36bb8bcda27e0e0ceb6e4bc3a64a506&db_Users&UserName|QQ&一水久钟|3563640373"));
 
             StartServer();
 

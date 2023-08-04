@@ -1,4 +1,5 @@
-﻿using SDK.SQL.SqlConnectionPool;
+﻿using SDK;
+using SDK.SQL.SqlConnectionPool;
 using System.Data.SqlClient;
 namespace SQL
 {
@@ -55,22 +56,20 @@ namespace SQL
                 }
             }
         }
-
-        //改
         public static bool TSQL_Update (string _Table_Name, string _Condition, string[] _List_Name, string[] _List_Value)
         {
             using (SqlConnection conn = SqlConnectionPool.GetConnection())
             {
                 conn.Open();
-                //构造 update 语句
+                // 构造 update 语句的 SET 子句
                 List<string> assignments = new List<string>();
                 for (int i = 0; i < _List_Name.Length; i++)
                 {
-                    assignments.Add($"{_List_Name[i]}='{_List_Value[i]}'");
+                    assignments.Add($"{_List_Name[i]} = '{@_List_Value[i]}'");
                 }
 
                 string sql = $"UPDATE {_Table_Name} SET {string.Join(", ", assignments)} WHERE {_Condition}";
-
+                API.Print(sql);
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     int result = cmd.ExecuteNonQuery();
@@ -79,6 +78,8 @@ namespace SQL
                 }
             }
         }
+
+
 
 
         /// <summary>
