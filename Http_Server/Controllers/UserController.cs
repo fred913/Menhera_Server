@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using SDk;
+using SDK;
+
 namespace Http_Server.Controllers
 {
     [ApiController]
@@ -14,10 +15,13 @@ namespace Http_Server.Controllers
 
             yield return _res;
         }
-        [HttpPost]
-        public IEnumerable<string> Post_Test ()
+
+        [HttpGet]
+        public IEnumerable<string> Get_HOiLAI ([FromQuery] string action)
         {
-            yield return $"status:true,res:Hello World！";
+            string _res = Analysis.GetReturnMessage(action);
+
+            yield return _res;
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿using SDK;
-using SDK.GameSDKS;
+﻿using SDK.GameSDKS;
+using SDK.HOILAI_Community;
 using SQL;
 using System.Text.Encodings.Web;
 
 using System.Text.Json;
-namespace SDk
+namespace SDK
 {
     public static class Analysis
     {
@@ -14,7 +14,7 @@ namespace SDk
 
         public static string GetReturnMessage (string message)
         {
-            //改为集合的方法
+            //分割字符串判断api类型
             var actions = new Dictionary<string, Func<string, string>>()
             {
                 { "Ver", GetVersion },
@@ -26,7 +26,9 @@ namespace SDk
                 { "Sendverification",Sendverification},
                 { "ResettingPassword",ResettingPassword},
                 { "GetUserInfo",GetUserInfo},
-                { "UpdateUserInfo",UpdateUserInfo}
+                { "UpdateUserInfo",UpdateUserInfo},
+                { "AddNewArticle",AddNewArticle},
+                { "GetOfficialArticles",GetOfficialArticles}
 
         };
             var parts = message.Split('&');
@@ -244,7 +246,7 @@ namespace SDk
                         WriteIndented = true
                     };
                     string json = JsonSerializer.Serialize(userInfo, options);
-                    API.Print(json);
+                    //API.Print(json);
                     return json;
                 }
                 else
@@ -292,6 +294,62 @@ namespace SDk
                 }
             }
         }
+        /// <summary>
+        /// 新建一个文章
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private static string AddNewArticle (string message)
+        {
+            string[] analysis = message.Split('&');
+            var _time = new DateTime();
+            DateTime.TryParse(analysis[2], out _time);
+            try
+            {
+                return API_Article.AddArticle_tb_OfficiaNews(analysis[0], Convert.ToInt32(analysis[1]), _time, analysis[3], analysis[4]);
+            }
+            catch (Exception ex)
+            {
+                API.Print(ex.Message);
+                return ex.Message;
+            }
 
+        }
+
+        /// <summary>
+        /// 返回json格式的官方动态信息
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private static string GetOfficialArticles (string message)
+        {
+            try
+            {
+                return API_Article.GetOfficialArticles();
+            }
+            catch (Exception ex)
+            {
+
+                return ex.Message;
+            }
+        }
+        /// <summary>
+        /// 官方的动态点赞
+        /// OfficialArticleLikes & 要点赞的文章id 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private static string OfficialArticleLikes (string message)
+        {
+            try
+            {
+                return "{state:true;title:权限不足}";
+                return 1.ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

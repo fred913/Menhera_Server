@@ -1,22 +1,15 @@
 using SDK;
+using SDK.HOILAI_Community;
 using System.Text;
 
 namespace GUI
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1 ()
+        public MainForm ()
         {
             InitializeComponent();
         }
-
-        private void Form1_Load (object sender, EventArgs e)
-        {
-
-        }
-
-
-
         private void timer1_Tick (object sender, EventArgs e)
         {
             Label_当前连接数.Text = $"当前连接数(TCP)：{ServerProgram.Program.clients.Count.ToString()}";
@@ -59,5 +52,24 @@ namespace GUI
             return result.ToString();
         }
 
+        private void Input_发送内容_TextChanged (object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button_新建文章_Click (object sender, EventArgs e)
+        {
+
+            try
+            {
+                API_Article.AddArticle_tb_OfficiaNews(Input_作者名.Text, Convert.ToInt32(Input_作者UID.Text), DateTime.Now, Input_文章地址.Text, Input_文章名.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+        }
     }
 }
